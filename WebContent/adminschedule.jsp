@@ -43,15 +43,16 @@ li a:hover:not (.active ) {
 </style>
 </head>
 <body>
+
 <%
 if(session.getAttribute("userName")==null){
 	response.sendRedirect("index.jsp");
 }
 %>
 <ul>
-		<li><a href="adminhome.jsp"    class="active">Home</a></li>
+		<li><a href="adminhome.jsp">Home</a></li>
 		<li><a href="adminaircraft.jsp">AirCrafts</a></li>
-		<li><a href="adminschedule.jsp">Schedule</a></li>
+		<li><a href="adminschedule.jsp"   class="active">Schedule</a></li>
 		<li><a href="adminreservations.jsp">Reservations</a></li>
 	</ul>
 

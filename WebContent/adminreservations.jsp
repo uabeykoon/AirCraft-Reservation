@@ -49,10 +49,10 @@ if(session.getAttribute("userName")==null){
 }
 %>
 <ul>
-		<li><a href="adminhome.jsp"    class="active">Home</a></li>
+		<li><a href="adminhome.jsp">Home</a></li>
 		<li><a href="adminaircraft.jsp">AirCrafts</a></li>
 		<li><a href="adminschedule.jsp">Schedule</a></li>
-		<li><a href="adminreservations.jsp">Reservations</a></li>
+		<li><a href="adminreservations.jsp" class="active">Reservations</a></li>
 	</ul>
 
 	<div
