@@ -47,11 +47,11 @@ if(session.getAttribute("userName")==null){
 <form method="post" action ="Addaircraft">
 <h2><a href="index.jsp">Back</a></h2>
 <div>
-<br><b>Aircraft Name:</b><br><input class="textbox"type="text" name = "aircraftName" placeholder = "MAKM123" required><br>
+<br><b>Aircraft Name:</b><br><input class="textbox"type="text" name = "aircraftName" placeholder = "MAKM123" requered><br>
 <br><b>Aircraft Number:</b><br><input class="textbox"type="text" name = "regNumber" placeholder = "LAX" required> <br>
 <br><b>Seats:</b><br><input class="textbox"type="text" name = "seatCount" placeholder = "00" required> <br>
 
-<input type="submit" value="Add" class="box">
+<input type="submit" value="Add" class="box" />
 
 </div>
 </form>

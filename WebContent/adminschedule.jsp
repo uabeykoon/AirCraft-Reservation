@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%@ page import="dao.AircraftDAO" %>
+   <%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,6 +63,7 @@ if(session.getAttribute("userName")==null){
 
 
 		<p>Some text some text some text some text..</p>
+		<a href="addflight.jsp"><button>ADD FLIGHT</button></a>
 
 	</div>
 
