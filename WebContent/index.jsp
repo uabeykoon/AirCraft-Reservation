@@ -12,7 +12,7 @@
 <body>
 
 	<form method = "POST" action="Login">
-		<label for="fname">User name:</label> <input type="text" id="username"
+		<label for="fname">Enter User name:</label> <input type="text" id="username"
 			name="username"><br>
 		<br> <label for="lname">Password :</label> <input type="text"
 			id="password" name="password"><br>

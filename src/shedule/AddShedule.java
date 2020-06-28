@@ -20,14 +20,20 @@ public class AddShedule extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SheduleDAO sheduledao = new SheduleDAO();
-		PrintWriter out = response.getWriter();
-		out.print(request.getParameter("dDate")+ request.getParameter("dTime")+ Integer.parseInt(request.getParameter("dAirport"))+ request.getParameter("aDate")+ request.getParameter("aTime")+ Integer.parseInt(request.getParameter("aAirport"))+request.getParameter("aID")+Integer.parseInt(request.getParameter("price")));
-		System.out.print("aaa");
+//		PrintWriter out = response.getWriter();
+//		out.print(request.getParameter("dDate")+ request.getParameter("dTime")+ Integer.parseInt(request.getParameter("dAirport"))+ request.getParameter("aDate")+ request.getParameter("aTime")+ Integer.parseInt(request.getParameter("aAirport"))+request.getParameter("aID")+Integer.parseInt(request.getParameter("price")));
+//		System.out.print("aaa");
 		
 		
 		try {
-	
-			sheduledao.addShedule(request.getParameter("dDate"), request.getParameter("dTime"), Integer.parseInt(request.getParameter("dAirport")), request.getParameter("aDate"), request.getParameter("aTime"), Integer.parseInt(request.getParameter("aAirport")), request.getParameter("aID"), Integer.parseInt(request.getParameter("price")));
+			if(sheduledao.addShedule(request.getParameter("dDate"), request.getParameter("dTime"), Integer.parseInt(request.getParameter("dAirport")), request.getParameter("aDate"), request.getParameter("aTime"), Integer.parseInt(request.getParameter("aAirport")), request.getParameter("aID"), Integer.parseInt(request.getParameter("price")))) {
+				response.sendRedirect("adminschedule.jsp");
+			}
+			else {
+				response.sendRedirect("addflight.jsp");
+			}
+			
+			
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

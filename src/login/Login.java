@@ -24,7 +24,8 @@ public class Login extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		logindao = new LoginDAO();
-		
+//		PrintWriter out = response.getWriter();
+//		out.println("aaa");
 		
 		
 		try {

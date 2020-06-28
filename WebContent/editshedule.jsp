@@ -2,6 +2,8 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page import="java.sql.*"%>
+
+<%@ page import="dao.SheduleDAO" %>
 <%@ page import="dao.AircraftDAO" %>
 <%@ page import="dao.AirportDAO" %>
 
@@ -58,15 +60,53 @@ if(session.getAttribute("userName")==null){
 	response.sendRedirect("index.jsp");
 }
 %>
-<form method="post" action="AddShedule">
+
+<%
+int sheduleID = Integer.parseInt(request.getParameter("sheduleID"));
+
+String dDate="";
+String dTime="" ;
+int dAirport=0;
+String dAirportName="";
+String aDate="";
+String aTime="";
+int aAirport=0;
+String aAirportName="";
+String aID=""; 
+int price=0;
+try{
+	SheduleDAO shedule = new SheduleDAO();
+	ResultSet rs = shedule.getOneShedule(sheduleID);
+	rs.next();
+	dDate=rs.getString("departureDate");
+	dTime=rs.getString("departureTime");
+	dAirport=rs.getInt("departureAirport");
+    dAirportName=rs.getString("a1Name");
+	aDate=rs.getString("arrivalDate");
+	aTime=rs.getString("arrivalTime");
+	aAirport=rs.getInt("arivalAirport");
+	aAirportName=rs.getString("a2Name");
+	aID=rs.getString("aircraftID"); 
+	price=rs.getInt("pricePerHead");
+	
+	
+	
+}catch(Exception e){
+	out.print(e);
+}
+%>
+
+<form method="post" action="Shedule">
 <h2><a href="index.jsp">Back</a></h2>
 <div>
+<input type="hidden" name="sheduleID" value="<%=sheduleID%>" />
 <label><b>Airplane RegNumber:</b> </label><br><%
  	try {
  		AircraftDAO aircraftdao = new AircraftDAO();
  		ResultSet rs = aircraftdao.getAircrafts();
  		
  %> <select id="aircraft" name="aID">
+ 							<option value=<%=aID%>><%=aID %></option>
 							<%
 								while (rs.next()) {
 							%>
@@ -86,6 +126,7 @@ if(session.getAttribute("userName")==null){
  		AirportDAO airportdao = new AirportDAO();
  		ResultSet rs2 = airportdao.getAirports();
  %> <select id="fromairport" name="dAirport">
+ 							<option value=<%=dAirport%>><%=dAirportName%></option>
 							<%
 								while (rs2.next()) {
 							%>
@@ -108,7 +149,7 @@ if(session.getAttribute("userName")==null){
 							<%
 								while (rs3.next()) {
 							%>
-							<option value=<%=rs3.getInt("airportID")%>><%=rs3.getString("name")%>(<%=rs3.getString("location")%>)</option>
+							<option value=<%=aAirport%>><%=aAirportName%></option>
 							<%
 								}
 							%>
@@ -119,14 +160,15 @@ if(session.getAttribute("userName")==null){
  	}
  %>
 
-<br><br><Label><b>Depart Date: </b><br></label> <input class="textbox" type="date" name="dDate" required><br>
-<br><Label><b>Depart Time: </b><br></label> <input class="textbox" type="time" name="dTime" required><br>
-<br><Label><b>Arrival Date: </b><br></label> <input class="textbox" type="date" name="aDate" required><br>
-<br><Label><b>Arrival Time: </b><br></label> <input class="textbox" type="time" name="aTime" required><br>
-<br><Label><b>Price:</b><br></label> <input class="textbox" type="number" name="price" required><br>
+<br><br><Label><b>Depart Date: </b><br></label> <input class="textbox" type="date" name="dDate" required value=<%=dDate %>><br>
+<br><Label><b>Depart Time: </b><br></label> <input class="textbox" type="time" name="dTime" required value=<%=dTime %>><br>
+<br><Label><b>Arrival Date: </b><br></label> <input class="textbox" type="date" name="aDate" required value=<%=aDate %>><br>
+<br><Label><b>Arrival Time: </b><br></label> <input class="textbox" type="time" name="aTime" required value=<%=aTime %>><br>
+<br><Label><b>Price:</b><br></label> <input class="textbox" type="number" name="price" required value=<%=price %>><br>
 
 
 <br><br><br><input type = "submit" class="box" value ="Add">
+<a href="adminschedule.jsp"><input type="button" value="CANCEL" class="box"></a>
 
 
 </div>
