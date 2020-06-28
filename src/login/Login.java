@@ -22,25 +22,51 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String type = request.getParameter("type");
 		
 		logindao = new LoginDAO();
 //		PrintWriter out = response.getWriter();
 //		out.println("aaa");
 		
-		
-		try {
-			if(logindao.validate(username, password)) {
-				HttpSession session = request.getSession();
-				session.setAttribute("userName", username);
-				response.sendRedirect("adminhome.jsp");
+		if(type.equals("admin")) {
+			try {
+				if(logindao.validateAdmin(username, password)) {
+					HttpSession session = request.getSession();
+					session.setAttribute("userName", username);
+					response.sendRedirect("adminhome.jsp");
+				}
+				else {
+					response.sendRedirect("index.jsp");
+				}
+			} catch (Exception e) {
+				PrintWriter out = response.getWriter();
+				out.println(e);
 			}
-			else {
-				response.sendRedirect("index.jsp");
-			}
-		} catch (Exception e) {
-			PrintWriter out = response.getWriter();
-			out.println(e);
+			
 		}
+		else if(type.equals("customer")) {
+			
+			try {
+				if(logindao.validateCustomer(username, password)) {
+					HttpSession session = request.getSession();
+					session.setAttribute("userName", username);
+					response.sendRedirect("searchflight.jsp");
+				}
+				else {
+					response.sendRedirect("index.jsp");
+				}
+			} catch (Exception e) {
+				PrintWriter out = response.getWriter();
+				out.println(e);
+			}
+			
+		}
+		else {
+			response.sendRedirect("index.jsp");
+		}
+		
+		
+		
 		
 	}
 
