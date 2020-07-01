@@ -84,19 +84,18 @@ input[type=button] {
 </head>
 <body>
 
-	<%
-	
-	response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
-	
+<%
 
-if(!session.getAttribute("userName").toString().equals("admin@admin.com")){
+
+response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
+
+if(session.getAttribute("userName")==null){
 	response.sendRedirect("index.jsp");
 }
 %>
 <ul>
-		<li><a href="adminhome.jsp">Home</a></li>
-		<li><a href="adminaircraft.jsp">AirCrafts</a></li>
-		<li><a href="adminschedule.jsp"   class="active">Schedule</a></li>
+		<li><a href="searchflight.jsp">Search Flight</a></li>
+		<li><a href="myreservation.jsp" class="active">My Reservations</a></li>
 				<form method="GET" action="Logout">
 		<input type="submit" value="Logout"  style="float:right;background-color:red" class="asd">	
 		</form>
@@ -107,15 +106,12 @@ if(!session.getAttribute("userName").toString().equals("admin@admin.com")){
 
 
 
-		<a href="addflight.jsp"><button><input type="button" value="ADD NEW SHEDULE"></button></a>
-		<br><br>
-		
-		
+	
 		
 		<%
 			try {
 			SheduleDAO shedule = new SheduleDAO();
-			ResultSet shd = shedule.getShedules();
+			ResultSet shd = shedule.getShedulesByuser(session.getAttribute("userName").toString());
 		%>
 		<table>
 			<tr>
@@ -127,8 +123,6 @@ if(!session.getAttribute("userName").toString().equals("admin@admin.com")){
 				<th>Arrival Airport</th>
 				<th>Aircraft Reg Number</th>
 				<th>Price Per Head</th>
-				<th>Edit</th>
-				<th>Delete</th>
 
 			</tr>
 
@@ -178,18 +172,7 @@ if(!session.getAttribute("userName").toString().equals("admin@admin.com")){
 						out.println(shd.getString("pricePerHead"));
 					%>
 				</td>
-				<td>
-					<form action="editshedule.jsp" method="post">
-					<button name="sheduleID" value=<%=shd.getString("sheduleID")%>>EDIT</button>
-					</form>
-					
-				</td>
-				<td>
-					<form action="Deleteshedules" method="post">
-					<button name="sheduleID" value=<%=shd.getString("sheduleID")%>>DELETE</button>
-					</form>
-					
-				</td>
+				
 				
 
 

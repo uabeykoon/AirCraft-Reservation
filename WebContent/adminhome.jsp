@@ -33,9 +33,19 @@ li a {
 	text-decoration: none;
 }
 
+.asd{
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
 li a:hover:not (.active ) {
 	background-color: #111;
 }
+
+
 
 .active {
 	background-color: #4CAF50;
@@ -43,8 +53,12 @@ li a:hover:not (.active ) {
 </style>
 </head>
 <body>
-<%
-if(session.getAttribute("userName")==null){
+	<%
+	
+	response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
+	
+
+if(!session.getAttribute("userName").toString().equals("admin@admin.com")){
 	response.sendRedirect("index.jsp");
 }
 %>
@@ -52,14 +66,18 @@ if(session.getAttribute("userName")==null){
 		<li><a href="adminhome.jsp"    class="active">Home</a></li>
 		<li><a href="adminaircraft.jsp">AirCrafts</a></li>
 		<li><a href="adminschedule.jsp">Schedule</a></li>
-		<li><a href="adminreservations.jsp">Reservations</a></li>
+		<li></li>
+		<form method="GET" action="Logout">
+		<input type="submit" value="Logout"  style="float:right;background-color:red" class="asd">	
+		</form>
+		
 	</ul>
 
 	<div
 		style="padding: 20px; margin-top: 30px; background-color: #1abc9c; height: 1500px;">
 
 
-		<p>Some text some text some text some text..</p>
+		<h1>WELCOME TO AIRLINE..</h1>
 
 	</div>
 

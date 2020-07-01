@@ -36,35 +36,73 @@ li a {
 	text-decoration: none;
 }
 
-li a:hover:not (.active ) {
-	background-color: #111;
+.asd{
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
 }
 
+li
+ 
+a
+:hover
+:not
+ 
+(
+.active
+ 
+)
+{
+background-color
+:
+ 
+#111
+;
+
+
+}
 .active {
 	background-color: #4CAF50;
 }
 
 table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
 }
 
 td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+	background-color: #dddddd;
+}
+
+input[type=button] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 </style>
 </head>
 <body>
 
-<%
-if(session.getAttribute("userName")==null){
+	<%
+	
+	response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
+	
+
+if(!session.getAttribute("userName").toString().equals("admin@admin.com")){
 	response.sendRedirect("index.jsp");
 }
 %>
@@ -77,15 +115,17 @@ if(session.getAttribute("userName")==null){
 		<li><a href="adminhome.jsp">Home</a></li>
 		<li><a href="adminaircraft.jsp" class="active">AirCrafts</a></li>
 		<li><a href="adminschedule.jsp">Schedule</a></li>
-		<li><a href="adminreservations.jsp">Reservations</a></li>
+				<form method="GET" action="Logout">
+		<input type="submit" value="Logout"  style="float:right;background-color:red" class="asd">	
+		</form>
 	</ul>
 
 	<div
 		style="padding: 20px; margin-top: 30px; background-color: #1abc9c; height: 1500px;">
-		
-		<a href="addaircraft.jsp"><button type="button">ADD AIRCRAFT</button></a>
 
-		
+		<a href="addaircraft.jsp"> <input type="button" value="ADD NEW AIRCRAFT"> </a><br><br>
+
+
 
 		<%
 			try {
@@ -97,6 +137,7 @@ if(session.getAttribute("userName")==null){
 				<th>Reg Number</th>
 				<th>Seat Count</th>
 				<th>Edit</th>
+				<th>Delete</th>
 
 			</tr>
 
@@ -118,11 +159,17 @@ if(session.getAttribute("userName")==null){
 				</td>
 				<td>
 					<form action="editaircraft.jsp" method="post">
-					<button name="regNumber" value=<%=air.getString("regNumber")%>>EDIT</button>
+						<button name="regNumber" value=<%=air.getString("regNumber")%>>EDIT</button>
 					</form>
-					
+
 				</td>
-				
+				<td>
+					<form action="Deleteaircraft" method="POST">
+						<button name="aircraftID" value=<%=air.getString("regNumber")%>>DELETE</button>
+					</form>
+
+				</td>
+
 
 
 
@@ -139,12 +186,6 @@ if(session.getAttribute("userName")==null){
 		}
 		%>
 
-
-
-
-
-
-		<p>Some text some text some text some text..</p>
 	</div>
 
 </body>

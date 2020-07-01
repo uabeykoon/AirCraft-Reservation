@@ -12,6 +12,8 @@ public class AircraftDAO {
 	private String sqlget = "select * from aircrafts";
 	private String sqladd = "insert into aircrafts values(?,?)";
 	private String sqlupdate = "UPDATE aircrafts SET seatCount = ? WHERE regNumber = ?";
+	
+	private String deletesql = "DELETE FROM aircrafts WHERE regNumber=?";
 
 	public ResultSet getAircrafts() throws Exception {
 		con = DBconnection.getConnection();
@@ -56,6 +58,26 @@ public class AircraftDAO {
 		else {
 			return false;
 		}
+		
+	}
+	
+	public boolean deleteAircraft(String aircraftReg) throws Exception{
+		con = DBconnection.getConnection();
+		PreparedStatement st = con.prepareStatement(deletesql);
+		st.setString(1, aircraftReg);
+		int rs = st.executeUpdate();
+		if(rs>0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+//		if(aircraftReg.equals("001")) {
+//			return true;
+//		}else {
+//			return false;
+//		}
 		
 	}
 

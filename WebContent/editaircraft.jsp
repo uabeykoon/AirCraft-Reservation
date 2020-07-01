@@ -25,23 +25,57 @@
     width: 75px; 
     color:green;
   }
+input[type=text], select ,input[type=number],input[type=password]{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=button] {
+  width: 100%;
+  background-color: #980000;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
 div {
-    padding: 50px;
-    border: 2px solid green;
-	width: 450px;
-    height:500px;
- 	
-    margin-right: 25px;
-    margin-left: 50px;
-    
-    font-family:verdana;
-    font-size:100%;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  width:25%;
+  margin:auto;
+  margin-top:100px;
 }
 </style> 
 </head>
 <body>
-<%
-if(session.getAttribute("userName")==null){
+	<%
+	
+
+if(!session.getAttribute("userName").toString().equals("admin@admin.com")){
 	response.sendRedirect("index.jsp");
 }
 %>
@@ -60,14 +94,13 @@ try{
 %>
 
 <form method="post" action ="Updateaircraft">
-<h2><a href="index.jsp">Back</a></h2>
 <div>
-<br><b>Aircraft Name:</b><br><input class="textbox"type="text" name = "aircraftName" placeholder = "MAKM123" required><br>
-<br><b>Aircraft Number:</b><br><input class="textbox"type="text" name = "regNumber" placeholder = "LAX" required  value=<%=regNumber%>> <br>
-<br><b>Seats:</b><br><input class="textbox"type="text" name = "seatCount" placeholder = "00" required  value=<%=seat%>> <br>
 
-<input type="submit" value="UPDATE" class="box">
-<a href="adminaircraft.jsp"><input type="button" value="CANCEL" class="box"></a>
+<br><b>Aircraft Registration Number:</b><br><input type="text" name = "regNumber" placeholder = "registration number" required  value=<%=regNumber%>> <br>
+<br><b>Seats:</b><br><input type="text" name = "seatCount" placeholder = "Seats count" required  value=<%=seat%>> <br>
+
+<input type="submit" value="UPDATE">
+<a href="adminaircraft.jsp"><input type="button" value="CANCEL"></a>
 
 </div>
 </form>

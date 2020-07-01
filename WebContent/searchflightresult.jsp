@@ -8,6 +8,61 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<style>
+body {
+	margin: 0;
+}
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+li {
+	float: left;
+}
+
+li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+li a:hover:not (.active ) {
+	background-color: #111;
+}
+
+.active {
+	background-color: #4CAF50;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+</head>
+<body>
 
 <%
 if(session.getAttribute("userName")==null){
@@ -15,9 +70,17 @@ if(session.getAttribute("userName")==null){
 }
 %>
 
+<ul>
+		<li><a href="searchflight.jsp" class="active">Search Flight</a></li>
+		<li><a href="#">My Reservations</a></li>
+
+	</ul>
+
+	<div
+		style="padding: 20px; margin-top: 30px; background-color: #1abc9c; height: 1500px;">
 
 
-<%
+		<%
 
 String dAirport = request.getParameter("dAirport");
 String aAirport = request.getParameter("aAirport");
@@ -110,8 +173,17 @@ String date = request.getParameter("date");
 			e.printStackTrace();
 		}
 		%>
-</head>
-<body>
+
+	</div>
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>
